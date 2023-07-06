@@ -4,7 +4,35 @@
 // 这个插件的 generator 选项，也就是用户对 prompts.js 中问题所提供的答案
 // 整个 preset (presets.foo) 将会作为第三个参数传入。
 
+const fs = require('fs');
+const tool = (api) => {
+  return {
+    deleteFile(path) {
+      const file = api.resolve(path);
+      if (fs.existsSync(file)) {
+        fs.unlinkSync(file);
+      }
+    },
+    deleteDir(path) {
+      const dir = api.resolve(path);
+      if (fs.existsSync(dir)) {
+        fs.readdirSync(dir).forEach((o) => {
+          const file = dir + '\\' + o;
+          if (fs.statSync(file).isDirectory()) {
+            fs.readdirSync(dir).forEach((p) => {
+              fs.unlinkSync(dir + '\\' + o + '\\' + p);
+            });
+          } else {
+            fs.unlinkSync(file);
+          }
+        });
+        fs.rmdirSync(dir);
+      }
+    }
+  };
+};
 module.exports = (api, options, rootOptions) => {
+    const utils = tool(api);
     api.extendPackage({
       // 命令
       scripts: {
@@ -30,6 +58,17 @@ module.exports = (api, options, rootOptions) => {
         "vue-template-compiler": "^2.6.14"
       }
     });
-    // 复制template模版
-    api.render('../template');
+  
+    // // 删除 vue-cli3 默认目录
+    // api.render(files => {
+    //   Object.keys(files)
+    //     .filter(path => path.startsWith('src/') || path.startsWith('public/'))
+    //     .forEach(path => delete files[path])
+    //   console.log(Object.keys(files))
+    // })
+      // 复制template模版
+    api.render('./template');
+    // api.onCreateComplete(() => {
+    //   process.env.VUE_CLI_SKIP_WRITE = true;
+    // });
   };
