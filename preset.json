@@ -1,0 +1,13 @@
+//使用 vue create 命令去创建项目时，保存的选项信息。这些预设信息，用于脚手架创建模板项目时使用。
+{
+    "useConfigFiles": false,
+    "plugins": {
+      "@vue/cli-plugin-babel": {},
+      "@vue/cli-plugin-router": {
+        "historyMode": false
+      },
+      "@vue/cli-plugin-vuex": {}
+    },
+    "vueVersion": "2",
+    "cssPreprocessor": "dart-sass"
+  }
