@@ -60,6 +60,15 @@ module.exports = (api, options, rootOptions) => {
         "vue-template-compiler": "^2.6.14"
       }
     });
+
+     // 安装 echarts
+    if (options.echarts) {
+      api.extendPackage({
+        devDependencies: {
+          "echarts": "^4.9.0",
+        }
+      });
+    }
   
     // 删除 vue-cli3 默认目录
     api.render(files => {
