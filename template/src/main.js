@@ -5,17 +5,17 @@ import store from './store'
 import axios from 'axios'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-if (options.echarts) {
+<%_ if (options.echarts) { _%>
   import echarts from 'echarts'
-}
+<%_ } _%>
 
 Vue.config.productionTip = false
 
 Vue.use(ElementUI);
 
-if (options.echarts) {
+<%_ if (options.echarts) { _%>
   Vue.prototype.$echarts = echarts
-}
+<%_ } _%>
 
 var vue=new Vue({
   router,

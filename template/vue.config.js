@@ -50,15 +50,15 @@ module.exports = {
     port: 8080, // 端口号
     https: false, // https:{type:Boolean}
     open: true, // 配置自动启动浏览器
-    proxy: {
-      "/test": {
-        target: "",
-        ws: false,
-        changeOrigin: true,
-        pathRewrite: {
-          "^/test": "",
-        },
-      },
-    },
+    // proxy: {
+    //   "/test": {
+    //     target: "",
+    //     ws: false,
+    //     changeOrigin: true,
+    //     pathRewrite: {
+    //       "^/test": "",
+    //     },
+    //   },
+    // },
   },
 };
