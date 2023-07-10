@@ -39,11 +39,13 @@ module.exports = (api, options, rootOptions) => {
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build"
       },
+      // 安装一些基础公共库
       dependencies: {
         "core-js": "^3.6.4",
         "terser-webpack-plugin": "^2.3.5",
         "element-ui": "^2.15.13",
         "moment": "^2.29.4",
+        "axios": "^0.20.0",
         "vue": "^2.6.11",
         "vue-router": "^3.1.5",
         "vuex": "^3.1.2",
@@ -59,16 +61,16 @@ module.exports = (api, options, rootOptions) => {
       }
     });
   
-    // // 删除 vue-cli3 默认目录
-    // api.render(files => {
-    //   Object.keys(files)
-    //     .filter(path => path.startsWith('src/') || path.startsWith('public/'))
-    //     .forEach(path => delete files[path])
-    //   console.log(Object.keys(files))
-    // })
-      // 复制template模版
+    // 删除 vue-cli3 默认目录
+    api.render(files => {
+      Object.keys(files)
+        .filter(path => path.startsWith('src/') || path.startsWith('public/'))
+        .forEach(path => delete files[path])
+      console.log(Object.keys(files))
+    })
+    // 复制template模版
     api.render('./template');
-    // api.onCreateComplete(() => {
-    //   process.env.VUE_CLI_SKIP_WRITE = true;
-    // });
+    api.onCreateComplete(() => {
+      process.env.VUE_CLI_SKIP_WRITE = true;
+    });
   };
